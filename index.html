@@ -17,7 +17,7 @@
     var openSite = function() {
       var randIdx = Math.random() * links.length;
       randIdx = parseInt(randIdx, 10);
-      var link = 'https://www.' + links[x];
+      var link = 'https://www.' + links[randIdx];
       window.location.href = link;
       window.location.replace(link)
     };
