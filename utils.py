@@ -29,13 +29,21 @@ def thumbnail_image(path, max_size=(300, 300), archive_old=True, archive_dir='ar
 
 
 if __name__ == '__main__':
+    pass
     # png_to_jpg('questions/eg_barchart.png')
     # png_to_jpg('questions/eg_exp_1.png')
     # png_to_jpg('questions/eg_exp_2.png')
     # png_to_jpg('questions/eg_exp_3.png')
-    for i in range(1, 29):
+    # for i in range(1, 29):
         # thumbnail_image(f'questions/Q{i}_sample.jpg')
-        thumbnail_image(f'questions/Q{i}_exp_correct.jpg')
-        thumbnail_image(f'questions/Q{i}_exp_wrong_A.jpg')
-        thumbnail_image(f'questions/Q{i}_exp_wrong_B.jpg')
+        # thumbnail_image(f'questions/Q{i}_exp_correct.jpg')
+        # thumbnail_image(f'questions/Q{i}_exp_wrong_A.jpg')
+        # thumbnail_image(f'questions/Q{i}_exp_wrong_B.jpg')
+    # thumbnail_image(f'questions/ADV13_exp_correct.jpg')
+    # thumbnail_image(f'questions/ADV13_exp_wrong_A.jpg')
+    # thumbnail_image(f'questions/ADV13_exp_wrong_B.jpg')
+    # thumbnail_image(f'questions/ADV16_exp_correct.jpg')
+    # thumbnail_image(f'questions/ADV16_exp_wrong_A.jpg')
+    # thumbnail_image(f'questions/ADV16_exp_wrong_B.jpg')
+
 
