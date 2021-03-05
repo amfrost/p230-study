@@ -48,6 +48,6 @@ if __name__ == '__main__':
     thumbnail_image(f'questions/eg_exp_1.jpg')
     thumbnail_image(f'questions/eg_exp_2.jpg')
     thumbnail_image(f'questions/eg_exp_3.jpg')
-    thumbnail_image(f'questions/eg_sample.jpg')
+    # thumbnail_image(f'questions/eg_sample.jpg')
 
 
