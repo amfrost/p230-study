@@ -45,5 +45,9 @@ if __name__ == '__main__':
     # thumbnail_image(f'questions/ADV16_exp_correct.jpg')
     # thumbnail_image(f'questions/ADV16_exp_wrong_A.jpg')
     # thumbnail_image(f'questions/ADV16_exp_wrong_B.jpg')
+    thumbnail_image(f'questions/eg_exp_1.jpg')
+    thumbnail_image(f'questions/eg_exp_2.jpg')
+    thumbnail_image(f'questions/eg_exp_3.jpg')
+    thumbnail_image(f'questions/eg_sample.jpg')
 
 
