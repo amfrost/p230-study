@@ -2,7 +2,7 @@ import requests
 import json
 from pprint import pprint
 import pickle
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 import os
 
@@ -66,7 +66,6 @@ def load_latest_survey_pull():
         for individual in data:
             individual['group'] = name
             individual_responses.append(individual)
-    pickle.dump(individual_responses, open(f'{survey_pulls_dir}/{latest_id}/all_individuals.pkl', 'wb'))
     print('test')
     all_modified_dates = []
     all_created_dates = []
@@ -77,18 +76,27 @@ def load_latest_survey_pull():
         created_dt = datetime.strptime(created_str, '%Y-%m-%dT%H:%M:%S+00:00')
         all_modified_dates.append(modified_dt)
         all_created_dates.append(created_dt)
+        individual['date_modified'] = modified_dt
+        individual['date_created'] = created_dt
+
+    pickle.dump(individual_responses, open(f'{survey_pulls_dir}/{latest_id}/all_individuals.pkl', 'wb'))
 
     most_recent_hits = sorted(all_modified_dates, reverse=True)
     most_recently_created = sorted(all_created_dates, reverse=True)
-    page_path = sorted([(datetime.strptime(response['date_created'], '%Y-%m-%dT%H:%M:%S+00:00'), len(response['page_path'])) for
-            response in individual_responses], key=lambda x: x[0], reverse=True)
-    print('test')
+    # page_path = sorted([(datetime.strptime(response['date_created'], '%Y-%m-%dT%H:%M:%S+00:00'), len(response['page_path'])) for
+    #         response in individual_responses], key=lambda x: x[0], reverse=True)
+    # print('test')
 
     completions = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
     for resp in individual_responses:
         if resp['response_status'] == 'completed':
             completions[resp['group']] += 1
 
+    now = datetime.now()
+    last_30 = timedelta(minutes=30)
+
+    recently_modified = sorted([resp['date_modified'] for resp in individual_responses if resp['date_modified'] > (now - last_30)], reverse=True)
+    recently_created = sorted([resp['date_created'] for resp in individual_responses if resp['date_modified'] > (now - last_30)], reverse=True)
     print('test')
 
 
@@ -102,7 +110,7 @@ def pull_survey_data(survey_id):
 
 if __name__ == '__main__':
     # resp = make_get_request(f'/v3/surveys')
-    pull_all_surveys()
+    # pull_all_surveys()
     load_latest_survey_pull()
     # ids = get_survey_ids()
     # print('test')
