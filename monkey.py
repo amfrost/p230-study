@@ -52,7 +52,7 @@ def pull_all_surveys():
         pickle.dump(response, open(f'{target_dir}/{name}.pkl', 'wb'))
         responses[name] = response
 
-    open(f'{filesafe_datetime}.time', 'a')
+    open(f'{target_dir}/{filesafe_datetime}.time', 'a')
     pickle.dump(responses, open(f'{target_dir}/all_responses.pkl', 'wb'))
 
 def load_latest_survey_pull():
@@ -84,6 +84,12 @@ def load_latest_survey_pull():
             response in individual_responses], key=lambda x: x[0], reverse=True)
     print('test')
 
+    completions = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
+    for resp in individual_responses:
+        if resp['response_status'] == 'completed':
+            completions[resp['group']] += 1
+
+    print('test')
 
 
 
@@ -95,6 +101,7 @@ def pull_survey_data(survey_id):
 
 
 if __name__ == '__main__':
+    # resp = make_get_request(f'/v3/surveys')
     pull_all_surveys()
     load_latest_survey_pull()
     # ids = get_survey_ids()
