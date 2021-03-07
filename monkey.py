@@ -71,10 +71,10 @@ def load_latest_survey_pull():
     all_modified_dates = []
     all_created_dates = []
 
-    # livetimes = [Path(f'./questions/permutations/perm_{i}/livetimes.txt') for i in range(len(list(Path('./questions/permutations').glob('perm_*'))))]
-    # livetimes = [open(pd, 'r').read() for pd in livetimes]
-    # livetimes = [datetime.strptime(livetimes[i], '%d/%m/%Y %H%M') for i in range(len(livetimes))]
-    # livetimes.append(datetime.now())
+    livetimes = [Path(f'./questions/permutations/perm_{i}/livetimes.txt') for i in range(len(list(Path('./questions/permutations').glob('perm_*'))))]
+    livetimes = [open(pd, 'r').read() for pd in livetimes]
+    livetimes = [datetime.strptime(livetimes[i], '%d/%m/%Y %H%M') for i in range(len(livetimes))]
+    livetimes.append(datetime.now())
 
 
 
@@ -87,12 +87,12 @@ def load_latest_survey_pull():
         all_created_dates.append(created_dt)
         individual['date_modified'] = modified_dt
         individual['date_created'] = created_dt
-        # perm = -1
-        # for i in range(len(livetimes)):
-        #     if created_dt >= livetimes[i] and modified_dt < livetimes[i+1]:
-        #         perm = i
-        #         break
-        # individual['permutation'] = perm
+        perm = -1
+        for i in range(len(livetimes)):
+            if created_dt >= livetimes[i] and modified_dt < livetimes[i+1]:
+                perm = i
+                break
+        individual['permutation'] = perm
 
     pickle.dump(individual_responses, open(f'{survey_pulls_dir}/{latest_id}/all_individuals.pkl', 'wb'))
 
@@ -112,7 +112,7 @@ def load_latest_survey_pull():
 
     recently_modified = sorted([resp['date_modified'] for resp in individual_responses if resp['date_modified'] > (now - last_30)], reverse=True)
     recently_created = sorted([resp['date_created'] for resp in individual_responses if resp['date_modified'] > (now - last_30)], reverse=True)
-    # perm_counts = [(i, [resp['permutation'] for resp in individual_responses if resp['response_status']=='completed'].count(i)) for i in range(7)]
+    perm_counts = [(i, [resp['permutation'] for resp in individual_responses if resp['response_status']=='completed'].count(i)) for i in range(7)]
     print('test')
 
 
