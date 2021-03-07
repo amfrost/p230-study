@@ -197,9 +197,9 @@ if __name__ == '__main__':
 
     # make_question_folders_from_root()
 
-    # create_permutation()
+    create_permutation()
 
-    make_permutation_live('./questions/permutations/perm_7')
+    make_permutation_live('./questions/permutations/perm_8')
 
 
 
