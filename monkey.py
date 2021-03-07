@@ -112,7 +112,8 @@ def load_latest_survey_pull():
 
     recently_modified = sorted([resp['date_modified'] for resp in individual_responses if resp['date_modified'] > (now - last_30)], reverse=True)
     recently_created = sorted([resp['date_created'] for resp in individual_responses if resp['date_modified'] > (now - last_30)], reverse=True)
-    perm_counts = [(i, [resp['permutation'] for resp in individual_responses if resp['response_status']=='completed'].count(i)) for i in range(7)]
+    perm_counts = [(i, [resp['permutation'] for resp in individual_responses if resp['response_status']=='completed'].count(i)) for i in range(len(list(Path('./questions/permutations').glob('perm_*'))))]
+    sorted_responses = sorted(individual_responses, key=lambda r:r['date_modified'], reverse=True)
     print('test')
 
 
