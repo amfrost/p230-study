@@ -109,7 +109,7 @@ def create_permutation():
     print('test')
 
     perm_ids = [p.parts[-1][p.parts[-1].index('_')+1:] for p in list(Path('./questions/permutations').glob('perm_*'))]
-    new_perm_id = int(max(sorted(perm_ids, key=lambda x: int(x)))) + 1
+    new_perm_id = int(sorted(perm_ids, key=lambda x: int(x))[-1]) + 1
 
     perm_dir = f'./questions/permutations/perm_{new_perm_id}'
     if not os.path.exists(perm_dir):
@@ -199,7 +199,7 @@ if __name__ == '__main__':
 
     create_permutation()
 
-    make_permutation_live('./questions/permutations/perm_10')
+    make_permutation_live('./questions/permutations/perm_11')
 
 
 
