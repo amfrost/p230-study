@@ -36,6 +36,18 @@ def get_survey_ids():
     ids = {'A': grp_a['id'], 'B': grp_b['id'], 'C': grp_c['id'], 'D': grp_d['id']}
     return ids
 
+def get_survey_details():
+    survey_ids = get_survey_ids()
+    details = {}
+    for group, id in survey_ids.items():
+        survey_details_file = f'./monkey_data/GET_grp-{group}-details_response.pkl'
+        if not os.path.exists(survey_details_file):
+            response = make_get_request(f'/v3/surveys/{id}/details')
+            pickle.dump(response, open(survey_details_file, 'wb'))
+        else:
+            response = pickle.load(open(survey_details_file, 'rb'))
+        details[group] = response
+    return details
 
 def pull_all_surveys():
     ids = get_survey_ids()
@@ -46,7 +58,7 @@ def pull_all_surveys():
     if not os.path.exists(target_dir):
         os.makedirs(target_dir)
 
-    surveys_dir = f'./monkey_data/survey_pulls/'
+    # surveys_dir = f'./monkey_data/survey_pulls/'
     responses = {}
     for name, id in ids.items():
         response = pull_survey_data(id)
