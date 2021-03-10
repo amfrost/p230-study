@@ -116,7 +116,7 @@ def load_latest_survey_pull():
 
     completions = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
     for resp in individual_responses:
-        if resp['response_status'] == 'completed':
+        if resp['response_status'] == 'completed' and resp['permutation'] != -1:
             completions[resp['group']] += 1
 
     now = datetime.now()
